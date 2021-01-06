@@ -34,11 +34,12 @@ class UserController extends Controller
 
     public function create()
     {
-        $professions = Profession::orderBy('title', 'ASC')->get();
-        $skills = Skill::orderBy('name', 'ASC')->get();
-        $roles = trans('users.roles');
+        //valores remplazados en le ViewServiceProvider View::composer
 
-        return view('users.create', compact('professions', 'skills', 'roles'));
+        //Crear un usuario por defecto para utilizar misma plantilla _fields
+        $user = new User;
+
+        return view('users.create', compact('user'));
     }
 
     public function store(CreateUserRequest $request)
@@ -50,7 +51,9 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        return view('users.edit', ['user' => $user]);
+       //valores remplazados en le ViewServiceProvider View::composer
+
+        return view('users.edit', compact('user'));
     }
 
     public function update(User $user)

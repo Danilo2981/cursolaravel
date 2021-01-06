@@ -61,9 +61,10 @@ class User extends Authenticatable
         return $this->belongsToMany(Skill::class, 'user_skill');    
     }
 
+    // withDefault establece un perfil por defecto
     public function profile()
     {
-        return $this->hasOne(UserProfile::class);
+        return $this->hasOne(UserProfile::class)->withDefault();
     }
 
 
