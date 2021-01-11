@@ -92,75 +92,17 @@ class CreateUsersTest extends TestCase
 
     /** @test */
 
-    function the_twitter_field_is_optional()
-    {
-        $this->post('/usuarios/', $this->withData([
-            'twitter' => null
-        ]))->assertRedirect('usuarios');
-
-        $this->assertCredentials([
-            'name' => 'Danilo',
-            'email' => 'danilo.vega@gmail.com',
-            'password' => '123456'
-        ]);
-        
-        $this->assertDatabaseHas('user_profiles', [
-            'bio' => 'Programador de Laravel y Vue.js',
-            'twitter' => null,
-            'user_id' => User::findByEmail('danilo.vega@gmail.com')->id
-        ]);
-    }
-
-    /** @test */
-
-    function the_role_field_is_optional()
-    {
-        $this->post('/usuarios/', $this->withData([
-            'role' => null
-        ]))->assertRedirect('usuarios');
-
-        $this->assertDatabaseHas('users', [
-            'email' => 'danilo.vega@gmail.com',
-            'role' => 'user'
-        ]);
-    }
-
-    /** @test */
-
-    function the_role_must_be_valid()
-    {
+    function the_user_is_redirected_to_the_previous_page_when_the_validation_fail()
+    {   
         $this->handleValidationExceptions();
 
-        $this->post('/usuarios/', $this->withData([
-            'role' => 'invalid-role'
-        ]))->assertSessionHasErrors('role');
+        $this->from('usuarios/nuevo')
+        ->post('/usuarios/', [])
+        ->assertRedirect('usuarios/nuevo');
 
-        $this->assertDatabaseMissing('users', [
-            'email' => 'danilo.vega@gmail.com',
-        ]);
+        $this->assertDatabaseEmpty('users');      
     }
-
-     /** @test */
-
-     function the_profession_field_is_optional()
-     {
-         $this->post('/usuarios/', $this->withData([
-             'profession_id' => ''
-         ]))->assertRedirect('usuarios');
- 
-         $this->assertCredentials([
-             'name' => 'Danilo',
-             'email' => 'danilo.vega@gmail.com',
-             'password' => '123456',
-         ]);
-         
-         $this->assertDatabaseHas('user_profiles', [
-             'bio' => 'Programador de Laravel y Vue.js',
-             'user_id' => User::findByEmail('danilo.vega@gmail.com')->id,
-             'profession_id' => null,
-         ]);
-     }
-
+   
     /** @test */
 
     function the_name_is_required()
@@ -174,20 +116,7 @@ class CreateUsersTest extends TestCase
         ->assertRedirect('usuarios/nuevo')
         ->assertSessionHasErrors(['name' => 'El campo es obligatorio']);
 
-        $this->assertEquals(0, User::count());      
-    }
-
-    /** @test */
-
-    function the_user_is_redirected_to_the_previos_page_when_the_validation_fail()
-    {   
-        $this->handleValidationExceptions();
-
-        $this->from('usuarios/nuevo')
-        ->post('/usuarios/', [])
-        ->assertRedirect('usuarios/nuevo');
-
-        $this->assertEquals(0, User::count());      
+        $this->assertDatabaseEmpty('users');     
     }
 
     /** @test */
@@ -200,7 +129,7 @@ class CreateUsersTest extends TestCase
             'email' => '',
         ]))->assertSessionHasErrors(['email']);
 
-        $this->assertEquals(0, User::count());      
+        $this->assertDatabaseEmpty('users');    
     }
 
     /** @test */
@@ -213,7 +142,7 @@ class CreateUsersTest extends TestCase
             'email' => 'correo-no-valido',
         ]))->assertSessionHasErrors(['email']);
 
-        $this->assertEquals(0, User::count());      
+        $this->assertDatabaseEmpty('users');      
     }
 
     /** @test */
@@ -243,8 +172,103 @@ class CreateUsersTest extends TestCase
             'password' => ''
         ]))->assertSessionHasErrors(['password']);
 
-        $this->assertEquals(0, User::count());      
+        $this->assertDatabaseEmpty('users');    
     }
+
+    /** @test */
+
+    function the_password_is_min()
+    {   
+        $this->handleValidationExceptions();
+
+        $this->post('/usuarios/', $this->withData([
+            'password' => '123'
+        ]))->assertSessionHasErrors(['password']);
+
+        $this->assertDatabaseEmpty('users');      
+    }
+
+    /** @test */
+ 
+    function the_role_field_is_optional()
+    {
+        $this->post('/usuarios/', $this->withData([
+            'role' => null
+        ]))->assertRedirect('usuarios');
+
+        $this->assertDatabaseHas('users', [
+            'email' => 'danilo.vega@gmail.com',
+            'role' => 'user'
+        ]);
+    }
+
+    /** @test */
+
+    function the_role_must_be_valid()
+    {
+        $this->handleValidationExceptions();
+
+        $this->post('/usuarios/', $this->withData([
+            'role' => 'invalid-role'
+        ]))->assertSessionHasErrors('role');
+
+        $this->assertDatabaseEmpty('users');
+    }
+
+     /** @test */
+
+    function the_bio_is_required()
+    {   
+        $this->handleValidationExceptions();
+
+        $this->post('/usuarios/', $this->withData([
+            'bio' => '',
+        ]))->assertSessionHasErrors(['bio']);
+
+        $this->assertDatabaseEmpty('user_profiles');    
+    }
+
+     /** @test */
+
+     function the_twitter_field_is_optional()
+     {
+         $this->post('/usuarios/', $this->withData([
+             'twitter' => null
+         ]))->assertRedirect('usuarios');
+ 
+         $this->assertCredentials([
+             'name' => 'Danilo',
+             'email' => 'danilo.vega@gmail.com',
+             'password' => '123456'
+         ]);
+         
+         $this->assertDatabaseHas('user_profiles', [
+             'bio' => 'Programador de Laravel y Vue.js',
+             'twitter' => null,
+             'user_id' => User::findByEmail('danilo.vega@gmail.com')->id
+         ]);
+     }
+ 
+      /** @test */
+ 
+      function the_profession_field_is_optional()
+      {
+          $this->post('/usuarios/', $this->withData([
+              'profession_id' => ''
+          ]))->assertRedirect('usuarios');
+  
+          $this->assertCredentials([
+              'name' => 'Danilo',
+              'email' => 'danilo.vega@gmail.com',
+              'password' => '123456',
+          ]);
+          
+          $this->assertDatabaseHas('user_profiles', [
+              'bio' => 'Programador de Laravel y Vue.js',
+              'user_id' => User::findByEmail('danilo.vega@gmail.com')->id,
+              'profession_id' => null,
+          ]);
+      }
 
      /** @test */
 
@@ -256,12 +280,12 @@ class CreateUsersTest extends TestCase
              'profession_id' => '999'
          ]))->assertSessionHasErrors(['profession_id']);
  
-         $this->assertEquals(0, User::count());      
+         $this->assertDatabaseEmpty('users');     
      }
 
      /** @test */
 
-     function only_selectable_professions_are_valid()
+     function the_profession_selectable_is_the_one_valid()
      {   
         $deletedProfession = Profession::factory()->create([
             'deleted_at' => now()->format('Y-m-d'),
@@ -273,7 +297,7 @@ class CreateUsersTest extends TestCase
              'profession_id' => $deletedProfession->id
          ]))->assertSessionHasErrors(['profession_id']);
  
-         $this->assertEquals(0, User::count());      
+         $this->assertDatabaseEmpty('users');      
      }
 
      /** @test */
@@ -286,7 +310,7 @@ class CreateUsersTest extends TestCase
              'skills' => 'PHP, JS'
          ]))->assertSessionHasErrors(['skills']);
  
-         $this->assertEquals(0, User::count());      
+         $this->assertDatabaseEmpty('users');    
      }
 
      /** @test */
@@ -302,20 +326,7 @@ class CreateUsersTest extends TestCase
              'skills' => [$skillA->id, $skillB->id+1]
          ]))->assertSessionHasErrors(['skills']);
  
-         $this->assertEquals(0, User::count());      
+         $this->assertDatabaseEmpty('users');      
      }
-
-    /** @test */
-
-    function the_password_is_min()
-    {   
-        $this->handleValidationExceptions();
-
-        $this->post('/usuarios/', $this->withData([
-            'password' => '123'
-        ]))->assertSessionHasErrors(['password']);
-
-        $this->assertEquals(0, User::count());      
-    }
 
 }

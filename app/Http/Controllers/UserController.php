@@ -3,13 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Profession;
-use App\Models\UserProfile;
-use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\DB;
 use App\Http\Requests\CreateUserRequest;
-use App\Models\Skill;
+use App\Http\Requests\UpdateUserRequest;
 
 class UserController extends Controller
 {
@@ -56,26 +52,9 @@ class UserController extends Controller
         return view('users.edit', compact('user'));
     }
 
-    public function update(User $user)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        $data = request()->validate([
-            'name' => 'required',
-            'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
-            'password' => ''
-        ],[
-            'name.required' => 'El campo es obligatorio',
-            'email.required' => 'El campo mail es obligatorio',
-            'email.email' => 'El campo mail es de tipo mail',
-            'email.unique' => 'El campo mail debe ser unico'            
-        ]);
-        
-        if ($data['password'] != null) {
-            $data['password'] = bcrypt($data['password']);    
-        } else {
-            unset($data['password']);
-        }
-        
-        $user->update($data);
+        $request->upadateUser($user);
         
         return redirect()->route('users.show', ['user' => $user]);
     }
