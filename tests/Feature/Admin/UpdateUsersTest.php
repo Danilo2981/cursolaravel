@@ -7,7 +7,6 @@ use App\Models\Skill;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\UserProfile;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UpdateUsersTest extends TestCase

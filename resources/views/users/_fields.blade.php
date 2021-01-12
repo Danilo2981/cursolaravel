@@ -51,7 +51,7 @@
 </div>
 <div class="mb-3">
     <label for="twitter" class="form-label">Twitter</label>
-    <input type="text" class="form-control" id="twitter" name="twitter" placeholder="https://twitter.com/danilo" value="{{ old('twitter', $user->profile->twitter) }}">
+    <input type="text" class="form-control" id="twitter" name="twitter" placeholder="https://twitter.com/usuario" value="{{ old('twitter', $user->profile->twitter) }}">
     <div id="twitHelp" class="form-text">
         @if ($errors->has('twitter'))
             <p>{{ $errors->first('twitter') }}</p>

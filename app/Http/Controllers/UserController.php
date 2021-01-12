@@ -54,7 +54,7 @@ class UserController extends Controller
 
     public function update(UpdateUserRequest $request, User $user)
     {
-        $request->upadateUser($user);
+        $request->updateUser($user);
         
         return redirect()->route('users.show', ['user' => $user]);
     }
