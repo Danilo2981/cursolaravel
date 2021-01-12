@@ -1,8 +1,10 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SkillController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProfessionController;
 use App\Http\Controllers\WelcomeUserController;
 
 
@@ -31,8 +33,15 @@ Route::put('/usuarios/{user}', [UserController::class, 'update'])->name('users.u
 Route::delete('/usuarios/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 
 // Profile
-Route::get('/editar-perfil/', [ProfileController::class, 'edit']);
-Route::put('/editar-perfil/', [ProfileController::class, 'update']);
+Route::get('/editar-perfil/', [ProfileController::class, 'edit'])->name('profiles.edit');
+Route::put('/editar-perfil/', [ProfileController::class, 'update'])->name('profiles.update');
+
+// Professions
+Route::get('/profesiones/', [ProfessionController::class, 'index'])->name('professions.index');
+Route::delete('/profesiones/{profession}', [ProfessionController::class, 'destroy'])->name('professions.destroy');
+
+// Skills
+Route::get('/habilidades/', [SkillController::class, 'index'])->name('skills.index');
 
 
 Route::get('/saludo/{name}/{nickname?}', WelcomeUserController::class);
