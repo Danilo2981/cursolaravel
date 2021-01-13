@@ -21,6 +21,10 @@ class ProfessionController extends Controller
 
     public function show(Profession $profession)
     {
+        if ($profession == null) {
+            return response()->view('errors.404', [], 404);
+        }
+
         return view('professions.show', compact('profession'));
     }
 

@@ -7,7 +7,7 @@
         <h1 class="pb-1">Listado de profesiones</h1>
     </div>
 
-    <table class="table">
+    <table class="table table-striped table-hover">
         <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>
