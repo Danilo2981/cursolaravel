@@ -27,7 +27,7 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer(['users.create', 'users.edit'], function($view){
+        View::composer(['users.create', 'users.edit', 'professions.edit'], function($view){
             $professions = Profession::orderBy('title', 'ASC')->get();
             $skills = Skill::orderBy('name', 'ASC')->get();
             $roles = trans('users.roles');

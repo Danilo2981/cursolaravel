@@ -27,11 +27,15 @@
                     <form action="{{ url("profesiones/{$profession->id}") }}" method="POST">
                         @csrf
                         @method('DELETE')
+                        <a href="{{ route('professions.show', $profession) }}" class="btn btn-link"><i class="fas fa-eye"></i></a>
+                        <a href="{{ route('professions.edit', $profession) }}" class="btn btn-link"><i class="fas fa-pen"></i></a>
                         <button type="submit" class="btn btn-link"><i class="fas fa-trash"></i></button>
                     </form>
                     @elseif($profession->profiles_count > 0)
-                    <button type="submit" class="btn btn-link disabled"><i class="fas fa-trash"></i></button>
-                    @endif
+                        <a href="{{ route('professions.show', $profession) }}" class="btn btn-link"><i class="fas fa-eye"></i></a>
+                        <a href="{{ route('professions.edit', $profession) }}" class="btn btn-link"><i class="fas fa-pen"></i></a>
+                        <button type="submit" class="btn btn-link disabled"><i class="fas fa-trash"></i></button>
+                    @endif 
                 </td>
             </tr>
         @endforeach

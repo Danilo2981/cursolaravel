@@ -6,7 +6,7 @@ use App\Http\Controllers\SkillController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfessionController;
 use App\Http\Controllers\WelcomeUserController;
-
+use App\Models\Profession;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +37,10 @@ Route::get('/editar-perfil/', [ProfileController::class, 'edit'])->name('profile
 Route::put('/editar-perfil/', [ProfileController::class, 'update'])->name('profiles.update');
 
 // Professions
-Route::get('/profesiones/', [ProfessionController::class, 'index'])->name('professions.index');
+Route::get('/profesiones', [ProfessionController::class, 'index'])->name('professions.index');
+Route::get('/profesiones/{profession}', [ProfessionController::class, 'show'])->name('professions.show');
+Route::get('/profesiones/{profession}/editar', [ProfessionController::class, 'edit'])->name('professions.edit');
+Route::put('/profesiones/{profession}', [ProfessionController::class, 'update'])->name('professions.update');
 Route::delete('/profesiones/{profession}', [ProfessionController::class, 'destroy'])->name('professions.destroy');
 
 // Skills
