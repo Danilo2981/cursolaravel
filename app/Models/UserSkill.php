@@ -5,16 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserProfile extends Model
+class UserSkill extends Model
 {
     use HasFactory;
 
-    //protected $fillable = [
-    //    'bio',
-    //    'twitter',
-    //    'profession_id'
-    // ];
+    protected $table = 'user_skill';
 
     protected $guarded = [];
-
 }
