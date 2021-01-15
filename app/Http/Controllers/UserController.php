@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Validation\Rule;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 
@@ -57,6 +56,13 @@ class UserController extends Controller
         $request->updateUser($user);
         
         return redirect()->route('users.show', ['user' => $user]);
+    }
+
+    public function trash(User $user)
+    {
+        $user->delete();
+        
+        return redirect()->route('users.index');
     }
 
     public function destroy(User $user)

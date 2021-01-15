@@ -27,9 +27,9 @@
         <td>{{ $user->name }}</td>
         <td>{{ $user->email }}</td>
         <td>
-            <form action="{{ route('users.destroy', $user) }}" method="POST">
-                {{ csrf_field() }}
-                {{ method_field('DELETE') }}
+            <form action="{{ route('users.trash', $user) }}" method="POST">
+                @csrf
+                @method('PATCH')
                 <a href="{{ route('users.show', $user) }}" class="btn btn-link"><i class="fas fa-eye"></i></a>
                 <a href="{{ route('users.edit', $user) }}" class="btn btn-link"><i class="fas fa-pen"></i></a>
                 <button type="submit" class="btn btn-link"><i class="fas fa-trash"></i></button>

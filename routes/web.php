@@ -30,6 +30,7 @@ Route::post('/usuarios', [UserController::class, 'store']);
 Route::get('/usuarios/{user}', [UserController::class, 'show'])->name('users.show');
 Route::get('/usuarios/{user}/editar', [UserController::class, 'edit'])->name('users.edit');
 Route::put('/usuarios/{user}', [UserController::class, 'update'])->name('users.update');
+Route::patch('/usuarios/{user}/papelera', [UserController::class, 'trash'])->name('users.trash');
 Route::delete('/usuarios/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 
 // Profile
