@@ -21,19 +21,19 @@
             <tr>
                 <th scope="row">{{ $skill->id }}</th>
                 <td>{{ $skill->name }}</td>
-                <td>{{ $skill->profiles_count }}</td>
+                <td>{{ $skill->skills_count }}</td>
                 <td>
-                    @if ($skill->profiles_count == 0)
+                    @if ($skill->skills_count == 0)
                     <form action="{{ url("habilidades/{$skill->id}") }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        {{-- <a href="{{ route('skills.show', $skill) }}" class="btn btn-link"><i class="fas fa-eye"></i></a> --}}
-                        {{-- <a href="{{ route('skills.edit', $skill) }}" class="btn btn-link"><i class="fas fa-pen"></i></a> --}}
+                        <a href="{{ route('skills.show', $skill) }}" class="btn btn-link"><i class="fas fa-eye"></i></a>
+                        <a href="{{ route('skills.edit', $skill) }}" class="btn btn-link"><i class="fas fa-pen"></i></a>
                         <button type="submit" class="btn btn-link"><i class="fas fa-trash"></i></button>
                     </form>
-                    @elseif($skill->profiles_count > 0)
-                        {{-- <a href="{{ route('skills.show', $skill) }}" class="btn btn-link"><i class="fas fa-eye"></i></a> --}}
-                        {{-- <a href="{{ route('skills.edit', $skill) }}" class="btn btn-link"><i class="fas fa-pen"></i></a> --}}
+                    @elseif($skill->skills_count > 0)
+                        <a href="{{ route('skills.show', $skill) }}" class="btn btn-link"><i class="fas fa-eye"></i></a>
+                        <a href="{{ route('skills.edit', $skill) }}" class="btn btn-link"><i class="fas fa-pen"></i></a>
                         <button type="submit" class="btn btn-link disabled"><i class="fas fa-trash"></i></button>
                     @endif 
                 </td>

@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Profession;
+use App\Models\Skill;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UdateProfessionRequest extends FormRequest
+class UpdateSkillRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,24 +25,24 @@ class UdateProfessionRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required',
+            'name' => 'required',
         ];
     }
 
     public function messages()
     {
         return[
-            'title.required' => 'El campo es obligatorio',
+            'name.required' => 'El campo es obligatorio',
         ];
     }
 
-    public function updateProfession(Profession $profession)
+    public function updateSkill(Skill $skill)
     {
-        $profession->fill([
-            'title' => $this->title,
+        $skill->fill([
+            'name' => $this->name,
         ]);
 
-        $profession->save();
+        $skill->save();
        
     }
 }

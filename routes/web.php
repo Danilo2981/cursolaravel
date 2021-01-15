@@ -45,7 +45,10 @@ Route::delete('/profesiones/{profession}', [ProfessionController::class, 'destro
 
 // Skills
 Route::get('/habilidades', [SkillController::class, 'index'])->name('skills.index');
-Route::delete('/habilidadades/{skill}', [SkillController::class, 'destroy'])->name('skills.destroy');
+Route::get('/habilidades/{skill}', [SkillController::class, 'show'])->name('skills.show');
+Route::get('/habilidades/{skill}/editar', [SkillController::class, 'edit'])->name('skills.edit');
+Route::put('/habilidades/{skill}', [SkillController::class, 'update'])->name('skills.update');
+Route::delete('/habilidades/{skill}', [SkillController::class, 'destroy'])->name('skills.destroy');
 
 
 Route::get('/saludo/{name}/{nickname?}', WelcomeUserController::class);

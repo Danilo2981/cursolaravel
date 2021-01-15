@@ -17,7 +17,7 @@ class DeleteSkillsTest extends TestCase
     {
         $skill = Skill::factory()->create();
         
-        $response = $this->delete("habilidadades/{$skill->id}");
+        $response = $this->delete("habilidades/{$skill->id}");
 
         $response->assertRedirect();
 
@@ -35,13 +35,13 @@ class DeleteSkillsTest extends TestCase
         $profile = UserSkill::factory()->create([
             'skill_id' => $skill->id, 
         ]);
+
+        $response = $this->delete("habilidades/{$skill->id}");
  
-         $response = $this->delete("habilidades/{$skill->id}");
+        $response->assertStatus(400);
  
-         $response->assertStatus(400);
- 
-         $this->assertDatabaseHas('skills', [
+        $this->assertDatabaseHas('skills', [
              'id' => $skill->id
-         ]);
+        ]);
      }
 }

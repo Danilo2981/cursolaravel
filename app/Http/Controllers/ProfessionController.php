@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Profession;
-use App\Http\Requests\UdateProfessionRequest;
+use App\Http\Requests\UpdateProfessionRequest;
 
 class ProfessionController extends Controller
 {
@@ -37,7 +37,7 @@ class ProfessionController extends Controller
     }
 
 
-    public function update(UdateProfessionRequest $request, Profession $profession)
+    public function update(UpdateProfessionRequest $request, Profession $profession)
     {
         $request->updateProfession($profession);
         
