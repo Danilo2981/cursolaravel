@@ -5,7 +5,7 @@
 <div class="d-flex justify-content-between align-items-end mb-2">
     <h1 class="pb-1">{{ $title }}</h1>
     <p>
-        <a href="{{ route('users.create') }}" class="btn btn-primary">Nuevo Usuario</a>
+        <a href="{{ route('users.create') }}" class="btn btn-primary">Papelera</a>
     </p>
 </div>
 
