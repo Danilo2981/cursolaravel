@@ -27,11 +27,13 @@ Route::get('/', function () {
 Route::get('/usuarios', [UserController::class, 'index'])->name('users.index');
 Route::get('/usuarios/crear', [UserController::class, 'create'])->name('users.create');
 Route::post('/usuarios', [UserController::class, 'store']);
+Route::get('/usuarios/papelera', [UserController::class, 'trashed'])->name('users.trashed');
 Route::get('/usuarios/{user}', [UserController::class, 'show'])->name('users.show');
 Route::get('/usuarios/{user}/editar', [UserController::class, 'edit'])->name('users.edit');
 Route::put('/usuarios/{user}', [UserController::class, 'update'])->name('users.update');
+Route::get('/usuarios/papelera', [UserController::class, 'trashed'])->name('users.trashed');
 Route::patch('/usuarios/{user}/papelera', [UserController::class, 'trash'])->name('users.trash');
-Route::delete('/usuarios/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+Route::delete('/usuarios/{id}', [UserController::class, 'destroy'])->name('users.destroy');
 
 // Profile
 Route::get('/editar-perfil', [ProfileController::class, 'edit'])->name('profiles.edit');

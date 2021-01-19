@@ -25,6 +25,7 @@ class CreateUserSkillTable extends Migration
                 ->references('id')
                 ->on('skills');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

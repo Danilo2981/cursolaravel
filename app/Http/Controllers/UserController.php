@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -14,6 +15,15 @@ class UserController extends Controller
         $users = User::all();
         
         $title = 'Listado de usuarios';
+
+        return view('users.index', compact('users', 'title'));
+    }
+
+    public function trashed()
+    {                
+        $users = User::onlyTrashed()->get();
+        
+        $title = 'Papelera';
 
         return view('users.index', compact('users', 'title'));
     }
@@ -61,15 +71,19 @@ class UserController extends Controller
     public function trash(User $user)
     {
         $user->delete();
+        // $user->profile()->delete();
+        // $user->skills()->delete();
         
         return redirect()->route('users.index');
     }
 
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        $user->delete();
+        $user = User::onlyTrashed()->where('id', $id)->firstOrFail();
 
-        return redirect()->route('users.index');
+        $user->forceDelete();
+
+        return redirect()->route('users.trashed');
     }
 
 }

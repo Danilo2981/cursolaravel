@@ -41,7 +41,10 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('skills.index') }}">Habilidades</a>
-                </li>                
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('users.trashed') }}">Papelera</a>
+                </li>                  
                 </ul>
                 <form class="d-flex">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
