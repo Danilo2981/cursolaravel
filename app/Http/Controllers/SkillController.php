@@ -19,6 +19,15 @@ class SkillController extends Controller
         ]);
     }
 
+    public function trashed()
+    {                
+        $skills = Skill::onlyTrashed()->get();
+        
+        $title = 'Papelera';
+
+        return view('skills.trashed', compact('skills', 'title'));
+    }
+
     public function show(Skill $skill)
     {
         if ($skill == null) {
@@ -44,13 +53,22 @@ class SkillController extends Controller
         return redirect()->route('skills.show', ['skill' => $skill]);
     }
 
-    public function destroy(Skill $skill)
+    public function trash(Skill $skill)
     {
         abort_if($skill->skills()->exists(), 400, 'Cannot delete a skill linked a user.');
 
         $skill->delete();
 
-        return redirect('habilidades');
+        return redirect()->route('skills.index');
+    }
+
+    public function destroy($id)
+    {
+        $skill = Skill::onlyTrashed()->where('id', $id)->firstOrFail();
+
+        $skill->forceDelete();
+
+        return redirect()->route('skills.trashed');
     }
 
 }

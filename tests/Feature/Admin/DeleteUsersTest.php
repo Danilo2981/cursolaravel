@@ -5,7 +5,6 @@ namespace Tests\Feature\Admin;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Skill;
-use App\Models\UserSkill;
 use App\Models\UserProfile;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 

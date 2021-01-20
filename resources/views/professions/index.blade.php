@@ -5,8 +5,13 @@
 @section('content')
     <div class="d-flex justify-content-between align-items-end mb-3">
         <h1 class="pb-1">Listado de profesiones</h1>
+        <p>
+            <a href=" {{ route('professions.trashed') }}" class="btn btn-primary">Papelera</a>
+        </p>
     </div>
 
+    @if ($professions -> isNotEmpty())
+        
     <table class="table table-striped table-hover">
         <thead class="thead-dark">
         <tr>
@@ -24,9 +29,9 @@
                 <td>{{ $profession->profiles_count }}</td>
                 <td>
                     @if ($profession->profiles_count == 0)
-                    <form action="{{ url("profesiones/{$profession->id}") }}" method="POST">
+                    <form action="{{ route('professions.trash', $profession) }}" method="POST">
                         @csrf
-                        @method('DELETE')
+                        @method('PATCH')
                         <a href="{{ route('professions.show', $profession) }}" class="btn btn-link"><i class="fas fa-eye"></i></a>
                         <a href="{{ route('professions.edit', $profession) }}" class="btn btn-link"><i class="fas fa-pen"></i></a>
                         <button type="submit" class="btn btn-link"><i class="fas fa-trash"></i></button>
@@ -41,6 +46,12 @@
         @endforeach
         </tbody>
     </table>
+
+    @else
+      <p> No hay profesiones registradas.</p>
+    @endif
+
+    
 @endsection
 
 @section('sidebar')

@@ -25,7 +25,7 @@ class UserController extends Controller
         
         $title = 'Papelera';
 
-        return view('users.index', compact('users', 'title'));
+        return view('users.trashed', compact('users', 'title'));
     }
 
     public function show(User $user)

@@ -5,8 +5,12 @@
 @section('content')
     <div class="d-flex justify-content-between align-items-end mb-3">
         <h1 class="pb-1">Listado de habilidades</h1>
+        <p>
+            <a href=" {{ route('skills.trashed') }}" class="btn btn-primary">Papelera</a>
+        </p>
     </div>
 
+    @if ($skills -> isNotEmpty())
     <table class="table table-striped table-hover">
         <thead class="thead-dark">
         <tr>
@@ -24,9 +28,9 @@
                 <td>{{ $skill->skills_count }}</td>
                 <td>
                     @if ($skill->skills_count == 0)
-                    <form action="{{ url("habilidades/{$skill->id}") }}" method="POST">
+                    <form action="{{ route('skills.trash', $skill) }}" method="POST">
                         @csrf
-                        @method('DELETE')
+                        @method('PATCH')
                         <a href="{{ route('skills.show', $skill) }}" class="btn btn-link"><i class="fas fa-eye"></i></a>
                         <a href="{{ route('skills.edit', $skill) }}" class="btn btn-link"><i class="fas fa-pen"></i></a>
                         <button type="submit" class="btn btn-link"><i class="fas fa-trash"></i></button>
@@ -41,6 +45,11 @@
         @endforeach
         </tbody>
     </table>
+    @else
+    <p> No hay habilidades registradas.</p> 
+    @endif
+
+    
 @endsection
 
 @section('sidebar')

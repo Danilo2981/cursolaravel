@@ -13,16 +13,38 @@ class DeleteSkillsTest extends TestCase
 
     /** @test */
 
-    function it_deletes_a_skill()
+    function it_sends_a_skill_to_the_trash()
     {
         $skill = Skill::factory()->create();
         
-        $response = $this->delete("habilidades/{$skill->id}");
+        $this->patch("habilidades/{$skill->id}/papelera")
+             ->assertRedirect('habilidades');
 
-        $response->assertRedirect();
+        // Option 1:    
+        $this->assertSoftDeleted('skills', [
+            'id' => $skill->id
+        ]);
+
+        // Option 2:
+        $skill->refresh();
+
+        $this->assertTrue($skill->trashed());
+    }    
+
+    /** @test */
+
+    function it_completely_deletes_a_skill()
+    {
+        $skill = Skill::factory()->create([
+            'deleted_at' => now()
+        ]);
+
+        $this->delete("habilidades/{$skill->id}")
+              ->assertRedirect(route('skills.trashed'));
 
         $this->assertDatabaseEmpty('skills');
-    }    
+    }
+
 
      /** @test */
 
@@ -36,7 +58,7 @@ class DeleteSkillsTest extends TestCase
             'skill_id' => $skill->id, 
         ]);
 
-        $response = $this->delete("habilidades/{$skill->id}");
+        $response = $this->patch("habilidades/{$skill->id}/papelera");
  
         $response->assertStatus(400);
  

@@ -6,6 +6,7 @@
     <h1 class="pb-1">{{ $title }}</h1>
     <p>
         <a href="{{ route('users.create') }}" class="btn btn-primary">Nuevo Usuario</a>
+        <a href=" {{ route('users.trashed') }}" class="btn btn-primary">Papelera</a>
     </p>
 </div>
 
@@ -27,13 +28,6 @@
         <td>{{ $user->name }}</td>
         <td>{{ $user->email }}</td>
         <td>
-            @if ($user->trashed())
-            <form action="{{ route('users.destroy', $user) }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-link"><i class="fas fa-skull"></i></button>
-            </form>    
-            @else
             <form action="{{ route('users.trash', $user) }}" method="POST">
                 @csrf
                 @method('PATCH')
@@ -41,7 +35,6 @@
                 <a href="{{ route('users.edit', $user) }}" class="btn btn-link"><i class="fas fa-pen"></i></a>
                 <button type="submit" class="btn btn-link"><i class="fas fa-trash"></i></button>
             </form>        
-            @endif            
         </td>
     </tr>
     @endforeach

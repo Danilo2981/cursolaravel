@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Skill extends Model
 {
+    use SoftDeletes;
+    
     use HasFactory;
 
     protected $fillable = ['name'];

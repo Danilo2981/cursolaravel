@@ -31,7 +31,6 @@ Route::get('/usuarios/papelera', [UserController::class, 'trashed'])->name('user
 Route::get('/usuarios/{user}', [UserController::class, 'show'])->name('users.show');
 Route::get('/usuarios/{user}/editar', [UserController::class, 'edit'])->name('users.edit');
 Route::put('/usuarios/{user}', [UserController::class, 'update'])->name('users.update');
-Route::get('/usuarios/papelera', [UserController::class, 'trashed'])->name('users.trashed');
 Route::patch('/usuarios/{user}/papelera', [UserController::class, 'trash'])->name('users.trash');
 Route::delete('/usuarios/{id}', [UserController::class, 'destroy'])->name('users.destroy');
 
@@ -41,16 +40,20 @@ Route::put('/editar-perfil', [ProfileController::class, 'update'])->name('profil
 
 // Professions
 Route::get('/profesiones', [ProfessionController::class, 'index'])->name('professions.index');
+Route::get('/profesiones/papelera', [ProfessionController::class, 'trashed'])->name('professions.trashed');
 Route::get('/profesiones/{profession}', [ProfessionController::class, 'show'])->name('professions.show');
 Route::get('/profesiones/{profession}/editar', [ProfessionController::class, 'edit'])->name('professions.edit');
 Route::put('/profesiones/{profession}', [ProfessionController::class, 'update'])->name('professions.update');
+Route::patch('/profesiones/{profession}/papelera', [ProfessionController::class, 'trash'])->name('professions.trash');
 Route::delete('/profesiones/{profession}', [ProfessionController::class, 'destroy'])->name('professions.destroy');
 
 // Skills
 Route::get('/habilidades', [SkillController::class, 'index'])->name('skills.index');
+Route::get('/habilidades/papelera', [SkillController::class, 'trashed'])->name('skills.trashed');
 Route::get('/habilidades/{skill}', [SkillController::class, 'show'])->name('skills.show');
 Route::get('/habilidades/{skill}/editar', [SkillController::class, 'edit'])->name('skills.edit');
 Route::put('/habilidades/{skill}', [SkillController::class, 'update'])->name('skills.update');
+Route::patch('/habilidades/{skill}/papelera', [SkillController::class, 'trash'])->name('skills.trash');
 Route::delete('/habilidades/{skill}', [SkillController::class, 'destroy'])->name('skills.destroy');
 
 
