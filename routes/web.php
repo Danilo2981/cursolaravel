@@ -32,7 +32,9 @@ Route::get('/usuarios/{user}', [UserController::class, 'show'])->name('users.sho
 Route::get('/usuarios/{user}/editar', [UserController::class, 'edit'])->name('users.edit');
 Route::put('/usuarios/{user}', [UserController::class, 'update'])->name('users.update');
 Route::patch('/usuarios/{user}/papelera', [UserController::class, 'trash'])->name('users.trash');
+Route::get('/usuarios/{id}/restore', [UserController::class, 'restore'])->name('users.restore');
 Route::delete('/usuarios/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+
 
 // Profile
 Route::get('/editar-perfil', [ProfileController::class, 'edit'])->name('profiles.edit');
@@ -45,6 +47,7 @@ Route::get('/profesiones/{profession}', [ProfessionController::class, 'show'])->
 Route::get('/profesiones/{profession}/editar', [ProfessionController::class, 'edit'])->name('professions.edit');
 Route::put('/profesiones/{profession}', [ProfessionController::class, 'update'])->name('professions.update');
 Route::patch('/profesiones/{profession}/papelera', [ProfessionController::class, 'trash'])->name('professions.trash');
+Route::get('/profesiones/{id}/restore', [ProfessionController::class, 'restore'])->name('professions.restore');
 Route::delete('/profesiones/{profession}', [ProfessionController::class, 'destroy'])->name('professions.destroy');
 
 // Skills
@@ -54,6 +57,7 @@ Route::get('/habilidades/{skill}', [SkillController::class, 'show'])->name('skil
 Route::get('/habilidades/{skill}/editar', [SkillController::class, 'edit'])->name('skills.edit');
 Route::put('/habilidades/{skill}', [SkillController::class, 'update'])->name('skills.update');
 Route::patch('/habilidades/{skill}/papelera', [SkillController::class, 'trash'])->name('skills.trash');
+Route::get('/habilidades/{id}/restore', [SkillController::class, 'restore'])->name('skills.restore');
 Route::delete('/habilidades/{skill}', [SkillController::class, 'destroy'])->name('skills.destroy');
 
 

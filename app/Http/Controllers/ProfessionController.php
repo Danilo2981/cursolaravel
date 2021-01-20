@@ -62,6 +62,14 @@ class ProfessionController extends Controller
         return redirect()->route('professions.index');
     }
 
+    public function restore($id)
+    {
+        $profession = Profession::onlyTrashed()->where('id', $id)->firstOrFail();
+        $profession->restore();
+
+        return redirect()->route('professions.index');
+    }
+
     public function destroy($id)
     {
         $profession = Profession::onlyTrashed()->where('id', $id)->firstOrFail();

@@ -62,6 +62,14 @@ class SkillController extends Controller
         return redirect()->route('skills.index');
     }
 
+    public function restore($id)
+    {
+        $skill = Skill::onlyTrashed()->where('id', $id)->firstOrFail();
+        $skill->restore();
+
+        return redirect()->route('skills.index');
+    }
+
     public function destroy($id)
     {
         $skill = Skill::onlyTrashed()->where('id', $id)->firstOrFail();

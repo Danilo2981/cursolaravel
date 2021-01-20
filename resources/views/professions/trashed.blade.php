@@ -30,6 +30,7 @@
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-link"><i class="fas fa-skull"></i></button>
+                        <a class="btn btn-link" title="Undo delete" href="{{route('professions.restore',$profession->id)}}"><i class="fas fa-recycle"></i></a>
                     </form>
                 </td>
             </tr>
