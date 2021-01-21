@@ -40,6 +40,13 @@
     @endforeach
 </tbody>
 </table>
+
+{{-- Pone la paginacion al pie --}}
+{{ $users->render() }}
+
+{{-- para corregir html estilos usar php artisan vendor:publish --}}
+{{-- para configurar en todas las paginas hacerlo en AppServiceProvider --}}
+
 @else 
 <p> No hay usuarios registrados.</p>
 @endif

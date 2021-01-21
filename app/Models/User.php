@@ -28,6 +28,17 @@ class User extends Authenticatable
 
     protected $guarded = [];
 
+    // define la cantidad de lineas a ver en la vista
+    protected $perPage = 15;
+
+    // multiplica la cantidad de lineas de perPage
+    public function getPerPage()
+    {
+        return parent::getPerPage() * 1;
+    }
+    
+    
+
     /**
      * The attributes that should be hidden for arrays.
      *

@@ -32,6 +32,57 @@ class ListUsersTest extends TestCase
 
     /** @test */
 
+    function it_shows_pagination_the_users_list() 
+    {
+        User::factory()->create([
+            'name' => 'Tercer Usuario',
+            'created_at' => now()->subDays(5)
+        ]);
+
+        User::factory()->times(12)->create([
+            'created_at' => now()->subDays(4)
+        ]);
+
+        User::factory()->create([
+            'name' => 'Decimoseptimo Usuario',
+            'created_at' => now()->subDays(2)
+        ]);
+        
+        User::factory()->create([
+            'name' => 'Segundo Usuario',
+            'created_at' => now()->subDays(6)
+        ]);
+
+        User::factory()->create([
+            'name' => 'Primer Usuario',
+            'created_at' => now()->subWeek()
+        ]);
+        
+        User::factory()->create([
+            'name' => 'Decimosexto Usuario',
+            'created_at' => now()->subDays(3)
+        ]);
+
+        $this->get('/usuarios')
+            ->assertStatus(200)
+            ->assertSeeInOrder([
+                'Decimoseptimo Usuario',
+                'Decimosexto Usuario',
+                'Tercer Usuario'
+            ])
+            ->assertDontSee('Segundo Usuario')
+            ->assertDontSee('Primer Usuario');
+        
+        $this->get('/usuarios?page=2')
+            ->assertSeeInOrder([
+                'Segundo Usuario',
+                'Primer Usuario'
+            ])
+            ->assertDontSee('Tercer Usuario');    
+    }
+
+    /** @test */
+
     function it_a_shows_default_message_if_the_users_list_is_empty() 
     {
         // DB::table('users')->truncate();

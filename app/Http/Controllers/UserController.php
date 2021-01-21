@@ -5,14 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
     
     public function index()
     {                
-        $users = User::all();
+        // simplePaginate para ver solo anterior y siguiente
+        $users = User::orderBy('created_at', 'DESC')->paginate();
         
         $title = 'Listado de usuarios';
 

@@ -30,11 +30,12 @@ class UserSeeder extends Seeder
             'bio' => 'Programador, musico, poeta y loco',
             'profession_id' => $professionId
         ]);
-
-        User::factory(29)->create()->each(function($user){
-            $user->profile()->create(
-                UserProfile::factory()->raw()
-            );
+        
+        // Remplaza el user_id en UserProfileFactory evitando que no se creen mas usuarios
+        User::factory(999)->create()->each(function($user){
+            UserProfile::factory()->create([
+                'user_id' => $user->id,
+            ]);
         });
         
     }
