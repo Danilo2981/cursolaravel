@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 
@@ -78,10 +79,15 @@ class UserController extends Controller
     public function restore($id)
     {
         $user = User::onlyTrashed()->where('id', $id)->firstOrFail();
+        $user->profile()->restore();
+
+        DB::table('user_skill')
+            ->where('user_id', $user->id)
+            ->update(array('deleted_at' => null));
         
         $user->restore();
 
-        return redirect()->route('users.index');
+        return redirect()->route('users.trashed');
     }
 
     public function destroy($id)

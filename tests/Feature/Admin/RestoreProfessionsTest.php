@@ -25,7 +25,7 @@ class RestoreProfessionsTest extends TestCase
         ]);
 
         $this->get("profesiones/{$profession->id}/restore")
-            ->assertRedirect(route('professions.index'));
+            ->assertRedirect(route('professions.trashed'));
 
         $this->assertDatabaseHas('professions', [
             'id'=> $profession->id,

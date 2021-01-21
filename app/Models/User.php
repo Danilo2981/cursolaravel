@@ -99,22 +99,6 @@ class User extends Authenticatable
             }
         });
         
-    }
-
-    public function restore()
-    {
-        DB::transaction(function(){
-            if (parent::restore()){
-                $this->profile()->restore();
-
-            DB::table('user_skill')
-                ->where('user_id', $this->id)
-                ->update(array('deleted_at' => null));
-
-                }
-        });
-    }
-
-    
+    }    
 
 }

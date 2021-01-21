@@ -44,7 +44,7 @@ class RestoreUsersTest extends TestCase
         ]);
 
         $this->get("usuarios/{$user->id}/restore")
-            ->assertRedirect(route('users.index'));
+            ->assertRedirect(route('users.trashed'));
 
         $this->assertDatabaseHas('users', [
             'id'=> $user->id,
