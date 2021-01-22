@@ -1,14 +1,18 @@
 <tr>
     <td rowspan="2">{{ $user->id }}</td>
-    <th scope="row">
-        {{ $user->name }}
-        <span class="note">Nombre de Empresa</span>
+    <th>
+        <blockquote class="blockquote">
+            <h6>{{ $user->name }}</h6>
+        </blockquote>            
+        <figcaption class="blockquote-footer fw-lighter">
+            <cite>Nombre</cite>
+        </figcaption>
     </th>
-    <td>{{ $user->email }}</td>
-    <td>{{ $user->role }}</td>
+    <td class="fw-lighter">{{ $user->email }}</td>
+    <td class="fw-lighter">{{ $user->role }}</td>
     <td>
-        <span class="note">Registro: {{ $user->created_at->format('d/m/Y') }}</span>
-        <span class="note">Último login: {{ $user->created_at->format('d/m/Y') }}</span>
+        <p class="fw-lighter mb-0">Registro: {{ $user->created_at->format('d/m/Y') }}</p>
+        <p class="fw-lighter">Último login: {{ $user->created_at->format('d/m/Y') }}</p>
     </td>
     <td class="text-right">
         @if ($user->trashed())
@@ -30,7 +34,13 @@
 </tr>
 <tr class="skills">
     <td colspan="1">
-        <span class="note">Profesion aqui</span>
+        {{-- trae el valor del modelo User funcion profile y del Modelo Profession funcion profession
+            se puede usar tabien el metodo option($user->profile->profession->title) --}}
+        @if ($user->profile->profession)
+        <h6 class="fw-lighter">{{ $user->profile->profession->title }}</h6>    
+        @endif        
     </td>
-    <td colspan="4"><span class="note">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos, libero veniam minus voluptatem adipisci error. Quo fugiat rem placeat dolores quaerat repudiandae quibusdam veniam porro ad consectetur, quas ab. Facere.</span></td>
+    <td colspan="4">
+        <p class="fw-lighter mb-0">{{ $user->skills->implode('name', ', ') ?: 'Sin habilidades :(' }}</p>
+    </td>
 </tr>

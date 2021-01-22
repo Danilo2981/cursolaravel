@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="d-flex justify-content-between align-items-end mb-2">
+<div class="d-flex justify-content-between align-items-end">
     <h1 class="pb-1">{{ $title }}</h1>
     <p>
         <a href="{{ route('users.create') }}" class="btn btn-outline-success">Nuevo Usuario</a>
@@ -108,9 +108,9 @@
     </div>    
 </form>
 
-<div class="table-responsive-lg">
+<div class="table-responsive-lg mt-2">
     <table class="table table-sm">
-        <thead class="thead-dark">
+        <thead class="table-dark">
         <tr>
             <th scope="col"># <span class="oi oi-caret-bottom"></span><span class="oi oi-caret-top"></span></th>
             <th scope="col" class="sort-desc">Nombre <span class="oi oi-caret-bottom"></span><span class="oi oi-caret-top"></span></th>
