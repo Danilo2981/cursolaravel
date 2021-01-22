@@ -13,7 +13,14 @@ class UserController extends Controller
     public function index()
     {                
         // simplePaginate para ver solo anterior y siguiente
-        $users = User::orderBy('created_at', 'DESC')->paginate();
+        $users = User::query()
+                // Cuando la busqueda pasa algo por el querry traer la busqueda
+                ->when(request('search'), function($query, $search){
+                    $query->where('name', 'like', "%{$search}%") //busqueda parcial like
+                          ->orWhere('email', 'like', "%{$search}%"); 
+                })
+                ->orderBy('created_at', 'DESC')
+                ->paginate();
         
         $title = 'Listado de usuarios';
 

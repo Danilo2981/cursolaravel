@@ -14,7 +14,7 @@
         <p class="fw-lighter mb-0">Registro: {{ $user->created_at->format('d/m/Y') }}</p>
         <p class="fw-lighter">Último login: {{ $user->created_at->format('d/m/Y') }}</p>
     </td>
-    <td class="text-right">
+    <td class="">
         @if ($user->trashed())
             <form action="{{ route('users.destroy', $user) }}" method="POST">
                 @csrf
