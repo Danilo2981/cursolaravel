@@ -8,6 +8,7 @@
             <cite>Nombre</cite>
         </figcaption>
     </th>
+    <td class="fw-lighter">{{ $user->team->name }}</td>
     <td class="fw-lighter">{{ $user->email }}</td>
     <td class="fw-lighter">{{ $user->role }}</td>
     <td>

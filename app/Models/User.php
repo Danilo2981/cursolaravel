@@ -36,8 +36,7 @@ class User extends Authenticatable
     {
         return parent::getPerPage() * 1;
     }
-    
-    
+        
 
     /**
      * The attributes that should be hidden for arrays.
@@ -64,6 +63,10 @@ class User extends Authenticatable
         return static::where('email', $email)->first();
     }
 
+    public function team()
+    {
+        return $this->belongsTo(Team::class)->withDefault();
+    }
 
     public function skills()
     {
