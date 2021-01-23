@@ -1,13 +1,13 @@
 <tr>
-    <td rowspan="2">{{ $user->id }}</td>
-    <th>
-        <blockquote class="blockquote">
-            <h6>{{ $user->name }}</h6>
-        </blockquote>            
-        <figcaption class="blockquote-footer fw-lighter">
-            <cite>Nombre</cite>
-        </figcaption>
-    </th>
+    <td rowspan="2" class="text-center">{{ $user->id }}</td>
+        <th>
+            <blockquote class="blockquote">
+                <h6>{{ $user->name }}</h6>
+            </blockquote>            
+            <figcaption class="blockquote-footer fw-lighter">
+                <cite>Nombre</cite>
+            </figcaption>
+        </th>
     <td class="fw-lighter">{{ $user->team->name }}</td>
     <td class="fw-lighter">{{ $user->email }}</td>
     <td class="fw-lighter">{{ $user->role }}</td>

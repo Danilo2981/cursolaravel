@@ -1,17 +1,13 @@
 <form method="get" action="{{ url('usuarios') }}">
     <div class="row row-cols-md-auto gx-0 align-items-center">
+        {{-- Formularios tipo radio id tiene que ser igual a for  --}}
+        @foreach (['' => 'Todos', 'with_team' => 'Con empresa', 'without_team' => 'Sin empresa'] as $value => $text)
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-            <label class="form-check-label" for="inlineCheckbox1">Todos</label>
-            </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-            <label class="form-check-label" for="inlineCheckbox1">Activos</label>
-            </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-            <label class="form-check-label" for="inlineCheckbox1">Inactivos</label>
-        </div>
+            <input class="form-check-input" type="radio" name="team" 
+                id="team_{{ $value ?: 'all' }}" value="{{ $value }}" {{ $value == request('team') ? 'checked' : '' }}>
+            <label class="form-check-label" for="team_{{ $value ?: 'all' }}">{{ $text }}</label>
+        </div>    
+        @endforeach
     </div>
     <div class="row row-cols-sm-auto gx-1 align-items-center justify-content-between">
         <div class="row row-cols-sm-auto gx-1 align-items-center">

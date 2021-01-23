@@ -14,10 +14,20 @@ class UserController extends Controller
     {                
         // simplePaginate para ver solo anterior y siguiente
         $users = User::query()
+                ->when(request('team'), function($query, $team){
+                    if ($team === 'with_team') {  //relacionado con el value de la vista
+                        $query->has('team');
+                    } elseif ($team === 'without_team') {
+                        $query->doesntHave('team');
+                    }
+                    
+                })
                 // Cuando la busqueda pasa algo por el querry traer la busqueda
                 ->when(request('search'), function($query, $search){
-                    $query->where('name', 'like', "%{$search}%") //busqueda parcial like
-                          ->orWhere('email', 'like', "%{$search}%"); 
+                    $query->where(function ($query) use ($search){      //where agrupa a consulta name y main en un mismo AND sql     
+                        $query->where('name', 'like', "%{$search}%")    //busqueda parcial like
+                        ->orWhere('email', 'like', "%{$search}%"); 
+                    });
                 })
                 ->orderBy('created_at', 'DESC')
                 ->paginate();
