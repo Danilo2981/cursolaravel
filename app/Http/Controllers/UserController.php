@@ -14,6 +14,7 @@ class UserController extends Controller
     {                
         // simplePaginate para ver solo anterior y siguiente
         $users = User::query()
+                // Consulta con radios
                 ->when(request('team'), function($query, $team){
                     if ($team === 'with_team') {  //relacionado con el value de la vista
                         $query->has('team');
