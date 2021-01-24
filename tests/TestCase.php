@@ -20,7 +20,7 @@ abstract class TestCase extends BaseTestCase
         $this->withoutExceptionHandling();
     }
 
-    public function addTestResponseMacros()
+    protected function addTestResponseMacros()
     {   
         TestResponse::macro('viewData', function ($key) {
             $this->ensureResponseHasView();

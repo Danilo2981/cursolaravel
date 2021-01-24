@@ -98,6 +98,20 @@ class User extends Authenticatable
             }
         });
         
-    }    
+    }
+    
+    public function scopeSearch($query, $search)
+    {
+        if (empty($search)) {
+            return;
+        }
 
+        $query->where(function ($query) use ($search){      //where agrupa a consulta name y main en un mismo AND sql     
+            $query->where('name', 'like', "%{$search}%")    //busqueda parcial like
+            ->orWhere('email', 'like', "%{$search}%")
+            ->orWhereHas('team', function ($query) use ($search){
+                $query->where('name', 'like', "%{$search}%");             //busca con una condicion de otro modelo      
+            }); 
+        });
+    }
 }

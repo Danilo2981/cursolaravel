@@ -23,13 +23,8 @@ class UserController extends Controller
                     }
                     
                 })
-                // Cuando la busqueda pasa algo por el querry traer la busqueda
-                ->when(request('search'), function($query, $search){
-                    $query->where(function ($query) use ($search){      //where agrupa a consulta name y main en un mismo AND sql     
-                        $query->where('name', 'like', "%{$search}%")    //busqueda parcial like
-                        ->orWhere('email', 'like', "%{$search}%"); 
-                    });
-                })
+                    
+                ->search(request('search'))
                 ->orderBy('created_at', 'DESC')
                 ->paginate();
         
