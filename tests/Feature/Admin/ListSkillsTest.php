@@ -4,7 +4,6 @@ namespace Tests\Feature\Admin;
 
 use App\Models\Skill;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class ListSkillsTest extends TestCase

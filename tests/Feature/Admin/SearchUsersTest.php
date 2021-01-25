@@ -5,7 +5,6 @@ namespace Tests\Feature\Admin;
 use App\Models\Team;
 use Tests\TestCase;
 use App\Models\User;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class SearchUsersTest extends TestCase

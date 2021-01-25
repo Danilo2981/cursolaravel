@@ -14,6 +14,7 @@ class UserController extends Controller
     {                
         // simplePaginate para ver solo anterior y siguiente
         $users = User::query()
+                ->with('team', 'profile', 'skills', 'profile.profession')        //establece la relacion con la que va a ejecutar las busquedas
                 // Consulta con radios
                 ->when(request('team'), function($query, $team){
                     if ($team === 'with_team') {  //relacionado con el value de la vista
@@ -22,8 +23,7 @@ class UserController extends Controller
                         $query->doesntHave('team');
                     }
                     
-                })
-                    
+                })                    
                 ->search(request('search'))
                 ->orderBy('created_at', 'DESC')
                 ->paginate();

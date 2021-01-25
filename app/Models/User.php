@@ -105,12 +105,12 @@ class User extends Authenticatable
         if (empty($search)) {
             return;
         }
-
-        $query->where(function ($query) use ($search){      //where agrupa a consulta name y main en un mismo AND sql     
-            $query->where('name', 'like', "%{$search}%")    //busqueda parcial like
+        
+        $query->where(function ($query) use ($search){          //where agrupa a consulta name y main en un mismo AND sql     
+            $query->where('name', 'like', "%{$search}%")        //busqueda parcial like
             ->orWhere('email', 'like', "%{$search}%")
             ->orWhereHas('team', function ($query) use ($search){
-                $query->where('name', 'like', "%{$search}%");             //busca con una condicion de otro modelo      
+            $query->where('name', 'like', "%{$search}%");       //busca con una condicion de otro modelo      
             }); 
         });
     }

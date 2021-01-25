@@ -25,9 +25,10 @@ class UserProfile extends Model
     public function profession()
     {
         // Da un valor por defecto para poder llamar a los usuarios que no tienen profesion desde la vista users.index
-        return $this->belongsTo(Profession::class)->withDefault([
+        return $this->belongsTo(Profession::class)
+            ->withDefault([
             'title' => '(Sin profesion)'
-        ]);
+            ]);
     }
 
 }

@@ -11,7 +11,7 @@ class ListProfessionsTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    function it_shows_the_users_list()
+    function it_shows_the_professions_list()
     {
         Profession::factory()->create([
             'title' => 'Diseñador'
@@ -32,5 +32,7 @@ class ListProfessionsTest extends TestCase
                 'Diseñador',
                 'Programador',
             ]);
+        
+        $this->assertNotRepeatedQueries();
     }
 }
