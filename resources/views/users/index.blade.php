@@ -14,9 +14,12 @@
 
 @include('users._filters')
 
-@if($users -> isNotEmpty()) 
+@if($users -> isNotEmpty())
+
 
 <div class="table-responsive-lg mt-2">
+    {{-- users es un objeto paginador por que en el modelo se esta usando paginate --}}
+    <p>Pagina {{ $users->currentPage() }} de {{ $users->lastPage() }}</p>
     <table class="table table-sm">
         <thead class="table-dark">
         <tr>
@@ -35,7 +38,9 @@
         </tbody>
     </table>
 
-    {{ $users->render() }}
+    {{-- appends ata la busqueda al request de la busqueda para que esta se mantenga al cambiar de pagina cuando esta filtrado     --}}
+    {{-- fragment permite poner un hash a la url http://cursolaravel.test/usuarios?search=Dr.&page=2#table --}}
+    {{ $users->appends(request(['search']))->fragment('table')->links() }}
 </div>
 
 {{-- Pone la paginacion al pie --}}

@@ -14,6 +14,7 @@ class UserController extends Controller
     {                
         // simplePaginate para ver solo anterior y siguiente
         $users = User::query()
+                // profile.profeesion permite traer el campo profesion a la relacion usuario - profile
                 ->with('team', 'profile', 'skills', 'profile.profession')        //establece la relacion con la que va a ejecutar las busquedas
                 // Consulta con radios
                 ->when(request('team'), function($query, $team){
